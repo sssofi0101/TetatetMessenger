@@ -6,7 +6,7 @@
         public Guid ChatId { get; set; }
         public Chat Chat { get; set; }  
 
-        public int UserId { get; set; } //автор
+        public Guid UserId { get; set; } //автор
         public User User { get; set; }  
 
         public string Content { get; set; }
