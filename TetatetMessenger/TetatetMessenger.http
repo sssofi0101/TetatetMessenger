@@ -1,0 +1,6 @@
+@TetatetMessenger_HostAddress = http://localhost:5121
+
+GET {{TetatetMessenger_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
