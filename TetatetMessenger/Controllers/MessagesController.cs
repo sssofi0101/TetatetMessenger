@@ -9,7 +9,7 @@ using TetatetMessenger_API.Models;
 
 namespace TetatetMessenger_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Messages")]
     [ApiController]
     public class MessagesController : ControllerBase
     {
@@ -28,10 +28,22 @@ namespace TetatetMessenger_API.Controllers
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetMessages), new { id = message.Id }, message);
+            return CreatedAtAction(nameof(GetMessage), new { id = message.Id }, message);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Message>> GetMessage(long id)
+        {
+            var todoItem = await _context.Messages.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            return todoItem;
         }
 
-        // GET: api/Messages
+        // GET: api/Messages/bhkbnuh676-bhuyg
         [HttpGet("{chatId}")]
         public async Task<ActionResult<IEnumerable<Message>>> GetMessages(Guid chatId)
         {

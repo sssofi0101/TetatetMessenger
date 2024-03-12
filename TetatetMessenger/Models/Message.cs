@@ -19,5 +19,6 @@
             Content = content;
             Time = time;
         }
+        public Message() { }
     }
 }

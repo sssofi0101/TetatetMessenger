@@ -22,4 +22,5 @@ public class User
         Surname = surname;
         City = city;
     }
+    public User() { }
 }
