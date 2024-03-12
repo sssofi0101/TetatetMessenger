@@ -11,6 +11,7 @@ namespace TetatetMessenger_API.Models
         public MessengerContext(DbContextOptions<MessengerContext> options)
             : base(options)
         {
+           // Database.EnsureCreated();
         }
     }
 }
