@@ -11,5 +11,13 @@
 
         public string Content { get; set; }
         public DateTime Time { get; set; }
+
+        public Message(Guid chatId, Guid userId, string content, DateTime time)
+        {
+            ChatId = chatId;
+            UserId = userId;
+            Content = content;
+            Time = time;
+        }
     }
 }

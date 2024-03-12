@@ -1,5 +1,6 @@
 using TetatetMessenger_API.Models;
 using Microsoft.EntityFrameworkCore;
+using TetatetMessenger_API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,5 +27,20 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<MessengerContext>();
+        SampleData.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
+    }
+}
 
 app.Run();

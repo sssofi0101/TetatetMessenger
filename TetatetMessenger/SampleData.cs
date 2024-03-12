@@ -13,12 +13,14 @@ namespace TetatetMessenger_API
             {
                 context.Users.Add(new User("user1", "user1","Иван", "Иванов","Курск"));
                 context.Users.Add(new User("user2", "user2", "Петр","Петров","Москва"));
-                user1 = context.Users.Where(u => u.Nickname == "user1" && u.Password == "user1").FirstOrDefault();
+                context.SaveChanges();
+                user1 = context.Users.Where(u => u.Nickname == "user1" && u.Password == "user1").First();
                 user2 = context.Users.Where(u => u.Nickname == "user2" && u.Password == "user2").FirstOrDefault();
             }
             if (!context.Chats.Any())
             {
                 context.Chats.Add(new Chat());
+                context.SaveChanges();
                 chat = context.Chats.FirstOrDefault();
             }
 
@@ -26,8 +28,9 @@ namespace TetatetMessenger_API
             {
                 if (user1 != null && user2 != null && chat != null) 
                 {
-                    context.UsersChats.Add(new UserChat(user1.Id, chat.Id));
-                    context.UsersChats.Add(new UserChat(user2.Id, chat.Id));
+                    var c = context.UsersChats.Add(new UserChat(user1.Id, chat.Id));
+                    c = context.UsersChats.Add(new UserChat(user2.Id, chat.Id));
+                    context.SaveChanges();
                 }
             }
             if (!context.Messages.Any())
@@ -36,6 +39,7 @@ namespace TetatetMessenger_API
                 {
                     context.Messages.Add(new Message(chat.Id,user1.Id,"Привет, Петр", DateTime.Now));
                     context.Messages.Add(new Message(chat.Id, user2.Id, "Привет, Иван", DateTime.Now));
+                    context.SaveChanges();
                 }
             }
 

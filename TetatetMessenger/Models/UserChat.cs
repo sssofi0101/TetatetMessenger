@@ -7,5 +7,11 @@
         public User User { get; set; }
         public Guid ChatId { get; set; }
         public Chat Chat { get; set; } 
+
+        public UserChat(Guid userId, Guid chatId)
+        {
+            UserId = userId;
+            ChatId = chatId;
+        }
     }
 }
