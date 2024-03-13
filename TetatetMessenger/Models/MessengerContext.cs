@@ -13,5 +13,9 @@ namespace TetatetMessenger_API.Models
         {
             Database.EnsureCreated();
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasAlternateKey(u => u.Nickname);
+        }
     }
 }
