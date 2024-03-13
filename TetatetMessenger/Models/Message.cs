@@ -4,10 +4,10 @@
     {
         public Guid Id { get; set; }
         public Guid ChatId { get; set; }
-        public Chat Chat { get; set; }  
+        public Chat? Chat { get; set; } 
 
         public Guid UserId { get; set; } //автор
-        public User User { get; set; }  
+        public User? User { get; set; } 
 
         public string Content { get; set; }
         public DateTime Time { get; set; }
@@ -18,6 +18,11 @@
             UserId = userId;
             Content = content;
             Time = time;
+        }
+        public Message(Guid chatId,Chat? chat, Guid userId, User? user,string content, DateTime time) : this (chatId, userId, content, time)
+        {
+            Chat = chat;
+            User = user;
         }
         public Message() { }
     }
