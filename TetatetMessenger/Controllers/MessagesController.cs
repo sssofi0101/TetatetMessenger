@@ -53,17 +53,21 @@ namespace TetatetMessenger_API.Controllers
             return await _context.Messages.Where(i => i.ChatId == chatId).ToListAsync();
         }
 
-        // PUT: api/Messages/5
+        // PUT: api/Messages/bhkbnuh676-bhuyg
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMessage(Guid id, Message message)
+        public async Task<IActionResult> PutMessage(Guid id, MessageApi message)
         {
-            if (id != message.Id)
+            var oldMessage = _context.Messages.FirstOrDefault(c => c.Id == id);
+            if (oldMessage == null)
             {
                 return BadRequest();
             }
+            var newMessage = oldMessage;
+            newMessage.Time = message.Time;
+            newMessage.Content = message.Content;
 
-            _context.Entry(message).State = EntityState.Modified;
+            _context.Entry(newMessage).State = EntityState.Modified;
 
             try
             {
