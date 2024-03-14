@@ -33,17 +33,17 @@ namespace TetatetMessenger_API.Controllers
             return CreatedAtAction(nameof(GetMessage), new { id = newMessage.Entity.Id }, message);
 
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Message>> GetMessage(long id)
+        [HttpGet("message/{id}")]
+        internal async Task<ActionResult<Message>> GetMessage(Guid id)
         {
-            var todoItem = await _context.Messages.FindAsync(id);
+            var message = await _context.Messages.FindAsync(id);
 
-            if (todoItem == null)
+            if (message == null)
             {
                 return NotFound();
             }
 
-            return todoItem;
+            return message;
         }
 
         // GET: api/Messages/bhkbnuh676-bhuyg
